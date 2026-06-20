@@ -1,0 +1,19 @@
+# Clean Customer Names (strip + title)
+
+import csv
+
+cleaned_rows = []
+with open("C:/Users/ASUS/OneDrive/Desktop/Python/Day22_orders_data.csv") as f:
+    reader = csv.DictReader(f)
+
+    for row in reader:
+        row["Customer_Name"] = row["Customer_Name"].strip().title()
+        cleaned_rows.append(row)
+
+# print(cleaned_rows)
+with open("cleaned_customers.csv", "w", newline="") as f:
+    # fieldnames = ["Order_ID", "Customer_Name", "City", "Payment_Type", "Price", "Quantity"]
+    writer = csv.DictWriter(f, fieldnames=reader.fieldnames)
+    writer.writeheader()
+    writer.writerows(cleaned_rows)
+print("Cleaned CSV file created successfully.")
